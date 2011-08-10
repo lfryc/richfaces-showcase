@@ -107,9 +107,9 @@
             <version>3.6.3.Final</version>
             <scope>${dependency.scope}</scope>
         </dependency>
-        
-        
-        <!-- Dependencies for Push and JMS -->
+
+
+		<!-- Dependencies for Push and JMS -->
         <dependency>
             <groupId>org.atmosphere</groupId>
             <artifactId>atmosphere-runtime</artifactId>
@@ -144,8 +144,8 @@
             <version>3.2.2.Final</version>
             <scope>${dependency.scope}</scope>
         </dependency>
-        
-        <!-- Dependencies for CDI -->
+
+		<!-- Dependencies for CDI -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
@@ -158,8 +158,8 @@
             <version>1.1.0.Final</version>
             <scope>${dependency.scope}</scope>
         </dependency>
-        
-        <!-- JBoss AS7 management -->
+
+		<!-- JBoss AS7 management -->
         <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-controller-client</artifactId>
@@ -217,14 +217,7 @@
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <classifier>tomcat6</classifier>
                     <webResources>
-                        <resource>
-                            <directory>src/main/webapp</directory>
-                        </resource>
-                        <resource>
-                            <directory>src/main/webapp-tomcat</directory>
-                        </resource>
                         <resource>
                             <directory>src/main/java</directory>
                             <targetPath>WEB-INF/src</targetPath>
@@ -236,6 +229,27 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>tomcat6</id>
+            <activation>
+                <activeByDefault />
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <classifier>tomcat6</classifier>
+                            <webResources>
+                                <resource>
+                                    <directory>src/main/webapp-tomcat</directory>
+                                </resource>
+                            </webResources>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>jee6</id>
             <properties>
@@ -250,17 +264,7 @@
                             <classifier>jee6</classifier>
                             <webResources>
                                 <resource>
-                                    <directory>src/main/webapp-tomcat</directory>
-                                    <excludes>
-                                        <exclude>**</exclude>
-                                    </excludes>
-                                </resource>
-                                <resource>
                                     <directory>src/main/webapp-jee6</directory>
-                                </resource>
-                                <resource>
-                                    <directory>src/main/java</directory>
-                                    <targetPath>WEB-INF/src</targetPath>
                                 </resource>
                             </webResources>
                         </configuration>
@@ -302,17 +306,7 @@
                             <classifier>jbas7</classifier>
                             <webResources>
                                 <resource>
-                                    <directory>src/main/webapp-tomcat</directory>
-                                    <excludes>
-                                        <exclude>**</exclude>
-                                    </excludes>
-                                </resource>
-                                <resource>
                                     <directory>src/main/webapp-jee6</directory>
-                                </resource>
-                                <resource>
-                                    <directory>src/main/java</directory>
-                                    <targetPath>WEB-INF/src</targetPath>
                                 </resource>
                             </webResources>
                         </configuration>
@@ -561,10 +555,6 @@
                                             <directory>src/main/resources-tomcat</directory>
                                             <targetPath>WEB-INF/classes</targetPath>
                                         </resource>
-                                        <resource>
-                                            <directory>src/main/java</directory>
-                                            <targetPath>WEB-INF/src</targetPath>
-                                        </resource>
                                     </webResources>
                                 </configuration>
                             </execution>
@@ -587,21 +577,11 @@
                                     </warSourceExcludes>
                                     <webResources>
                                         <resource>
-                                            <directory>src/main/webapp-tomcat</directory>
-                                            <excludes>
-                                                <exclude>**</exclude>
-                                            </excludes>
-                                        </resource>
-                                        <resource>
                                             <directory>src/main/webapp-jee6</directory>
                                         </resource>
                                         <resource>
                                             <directory>src/main/resources-jee6</directory>
                                             <targetPath>WEB-INF/classes</targetPath>
-                                        </resource>
-                                        <resource>
-                                            <directory>src/main/java</directory>
-                                            <targetPath>WEB-INF/src</targetPath>
                                         </resource>
                                     </webResources>
                                 </configuration>
@@ -625,21 +605,11 @@
                                     </warSourceExcludes>
                                     <webResources>
                                         <resource>
-                                            <directory>src/main/webapp-tomcat</directory>
-                                            <excludes>
-                                                <exclude>**</exclude>
-                                            </excludes>
-                                        </resource>
-                                        <resource>
                                             <directory>src/main/webapp-jee6</directory>
                                         </resource>
                                         <resource>
                                             <directory>src/main/resources-jbas7</directory>
                                             <targetPath>WEB-INF/classes</targetPath>
-                                        </resource>
-                                        <resource>
-                                            <directory>src/main/java</directory>
-                                            <targetPath>WEB-INF/src</targetPath>
                                         </resource>
                                     </webResources>
                                 </configuration>
